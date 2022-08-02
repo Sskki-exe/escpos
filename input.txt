@@ -1,2 +1,2 @@
-!iimage.gif!i
+!iimage.gif
 end of image ig
