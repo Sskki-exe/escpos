@@ -1,9 +1,49 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Pi Zero Server</title>
-    </head>
-    <body>
-        <h1>Pi Zero Server</h1>
-    </body>
+
+<head>
+    <title>Thermal Printer</title>
+    <style>
+        :root {
+            --p: #8c6d62;
+            --pL:#bd9b8f;
+            --pD: #5e4238;
+            --n0: #F5F5F6;
+            --n1: #E1E2E1;
+        }
+
+        body {
+            background-color: var(--n0);
+            margin: 0;
+            font-family: Arial;
+        }
+
+        h2 {
+            background-color: var(--p);
+            color: white;
+            margin: 0;
+            padding: 4mm;
+        }
+
+        div {
+            padding: 15mm 15%;
+            width: 100%;
+        }
+
+        .output {
+            background-color: var(--n1);
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Thermal Printer</h2>
+    <div class="output"></div>
+    <div>
+        <label for="image_input">Image:</label>
+        <input type="file" id="image_input" multiple>
+        
+    </div>
+</body>
+
 </html>
