@@ -6,7 +6,7 @@
     <style>
         :root {
             --p: #8c6d62;
-            --pL:#bd9b8f;
+            --pL: #bd9b8f;
             --pD: #5e4238;
             --n0: #F5F5F6;
             --n1: #E1E2E1;
@@ -33,6 +33,25 @@
         .output {
             background-color: var(--n1);
         }
+
+        button {
+            color: white;
+            background-color: var(--p);
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+
+        button:hover {
+            background-color: var(--pD);
+        }
+
+        button:active {
+            background-color: var(--pL);
+        }
     </style>
 </head>
 
@@ -42,10 +61,21 @@
     <div>
         <label for="image_input">Image:</label>
         <input type="file" id="image_input" multiple>
-        <br><br>
+
+        <form action="/print">
+            <button>Print</button>
+        </form><br>
+
         <label for="text_input">Text:</label><br>
-        <textarea id="text_input"></textarea>
+        <textarea id="text_input" cols="32" oninput="auto_grow(this)"></textarea>
     </div>
+
+    <script>
+        function auto_grow(element) {
+            element.style.height = "100px";
+            element.style.height = (element.scrollHeight) + "px";
+        }
+    </script>
 </body>
 
 </html>
