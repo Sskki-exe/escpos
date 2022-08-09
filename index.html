@@ -58,22 +58,25 @@
 <body>
     <h2>Thermal Printer</h2>
     <div class="output"></div>
-    <div>
-        <label for="image_input">Image:</label>
-        <input type="file" id="image_input" multiple>
-
+    <div>        
         <form action="/print">
-            <button>Print</button>
+            <label for="image_input">Image:</label>
+            <input type="file" id="image_input" multiple>
+            <label for="text_input">Text:</label><br>            
+            <textarea id="text_input" cols="32" oninput="auto_grow(this)"></textarea>            
+            <button type="submit">Print</button>
         </form><br>
 
-        <label for="text_input">Text:</label><br>
-        <textarea id="text_input" cols="32" oninput="auto_grow(this)"></textarea>
+        
     </div>
 
     <script>
         function auto_grow(element) {
             element.style.height = "100px";
             element.style.height = (element.scrollHeight) + "px";
+        }
+        function print() {
+            var f = ret
         }
     </script>
 </body>
