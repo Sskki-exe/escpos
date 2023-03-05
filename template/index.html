@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Thermal Printer</title>
+    <title>TEMP Thermal Printer</title>
     <style>
         :root {
             --p: #8c6d62;
@@ -52,29 +52,61 @@
         button:active {
             background-color: var(--pL);
         }
+
+        textarea {
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        input[type='number'] {
+            width: 45px;
+        }
     </style>
 </head>
 
-<body>
-    <h2>Thermal Printer</h2>
+<body onload="document.main.reset()">
+    <h2>TEMP Thermal Printer</h2>
     <div class="output"></div>
-    <div>        
-        <form action="/print">
-            <label for="image_input">Image:</label>
-            <input type="file" id="image_input" multiple>
-            <label for="text_input">Text:</label><br>            
-            <textarea id="text_input" cols="32" oninput="auto_grow(this)"></textarea>            
+    <div>
+        <form method="post" enctype="multipart/form-data">
+            <label>Image:</label>
+            <input name="image_input" type="file"><br><br>
+            <label>Text:</label><br>
+            <textarea name="text_input" cols="32" oninput="auto_grow(this)"></textarea>
+            <br><br>
+
             <button type="submit">Print</button>
         </form><br>
 
-        
+
     </div>
 
     <script>
+        function updateImgW(x) {
+            if (x) {
+                var num = document.getElementById("imgWText");
+                num.value = num.value >= 1 ? num.value <= 384 ? num.value : 384 : 1;
+                document.getElementById("imgW").value = num.value;
+            } else {
+                document.getElementById("imgWText").value = document.getElementById("imgW").value;
+            }
+        }
+
+        function updateCharW(x) {
+            if (x) {
+                var num = document.getElementById("charWText");
+                num.value = num.value >= 1 ? num.value <= 32 ? num.value : 32 : 1;
+                document.getElementById("charW").value = num.value;
+            } else {
+                document.getElementById("charWText").value = document.getElementById("charW").value;
+            }
+        }
+
         function auto_grow(element) {
             element.style.height = "100px";
             element.style.height = (element.scrollHeight) + "px";
         }
+
         function print() {
             var f = ret
         }

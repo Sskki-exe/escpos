@@ -5,14 +5,13 @@ import textwrap
 
 # Variables
 maxW = 384
-fp = "te"
 
 # Define Functions
-def printImage(prev,dar,ars,cf):
+def printImage():
     print("Printing Image!")
     im = Image.open("out.gif")
     # If don't auto rotate option select
-    if not dar:
+    if False:
         try:
             print("    Auto Rotating")
             if ars:
@@ -27,7 +26,7 @@ def printImage(prev,dar,ars,cf):
                     im = im.rotate(90, expand=True)
         except:
             print("    Failed to rotate")
-    if cf:
+    if False:
         try:
             print("    Filtering Color")
             im = im.filter(ImageFilter.EDGE_ENHANCE_MORE).filter(ImageFilter.EDGE_ENHANCE_MORE).filter(ImageFilter.EDGE_ENHANCE_MORE)
@@ -53,7 +52,7 @@ def printImage(prev,dar,ars,cf):
     # Save Image
     im.save('out.gif')
     # Print Image
-    if prev:
+    if False:
         try:
             im = ImageOps.grayscale(im)
             im.save('static/preview.gif')
@@ -82,7 +81,7 @@ p = Usb(0x0456, 0x0808, 0, 0x81, 0x03)
 print("Printer Connected!")
 p.text("\n")
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="template")
 
 @app.after_request
 def add_header(r):
@@ -97,23 +96,12 @@ def clickPrint():
     if request.method == "POST":
         print("Print button clicked!")
         printText(request.form.get("text_input"))
-        if 'image_input' in request.files:
-            file = request.files.get('image_input')
-            if file.filename != '':
-                print("Saving: "+str(file))
-                file.save('out.gif')
-                print("saved")
-                prev = request.form.get("preview")=="on"
-                dar = request.form.get("dontAutoRotate")=="on"
-                ars = request.form.get("autoRotateSmall")=="on"
-                cf = request.form.get("colorFilter")=="on"
-                printImage(prev,dar,ars,cf)
-            else:
-                try:
-                    Image.new('RGB',(1,1)).save("static/preview.gif")
-                except:
-                    print("Failed to reset image")
-        p.text("\n\n\n")
+        file = request.files['image_input']
+        if file != None:
+            print("Saving: "+str(file))
+            file.save('out.gif')
+            print("saved")
+            printImage()
     return render_template('index.html')
 
 if __name__=="__main__":
