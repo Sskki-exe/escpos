@@ -96,12 +96,15 @@ def clickPrint():
     if request.method == "POST":
         print("Print button clicked!")
         printText(request.form.get("text_input"))
-        file = request.files['image_input']
-        if file != None:
-            print("Saving: "+str(file))
-            file.save('out.gif')
-            print("saved")
-            printImage()
+        try:
+            file = request.files['image_input']
+            if file != None:
+                print("Saving: "+str(file))
+                file.save('out.gif')
+                print("saved")
+                printImage()
+        except:
+            pass
     return render_template('index.html')
 
 if __name__=="__main__":
