@@ -7,11 +7,11 @@ import textwrap
 maxW = 384
 
 # Define Functions
-def printImage():
+def printImage(ar,fl):
     print("Printing Image!")
     im = Image.open("out.gif")
     # If don't auto rotate option select
-    if False:
+    if ar:
         try:
             print("    Auto Rotating")
             if ars:
@@ -26,7 +26,7 @@ def printImage():
                     im = im.rotate(90, expand=True)
         except:
             print("    Failed to rotate")
-    if False:
+    if fl:
         try:
             print("    Filtering Color")
             im = im.filter(ImageFilter.EDGE_ENHANCE_MORE).filter(ImageFilter.EDGE_ENHANCE_MORE).filter(ImageFilter.EDGE_ENHANCE_MORE)
@@ -102,7 +102,9 @@ def clickPrint():
                 print("Saving: "+str(file))
                 file.save('out.gif')
                 print("saved")
-                printImage()
+                ar = request.form.get("autoRotate")
+                fl = request.form.get("colorFilter")
+                printImage(ar,fl)
         except:
             pass
     return render_template('index.html')
