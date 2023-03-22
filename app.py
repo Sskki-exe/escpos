@@ -18,6 +18,12 @@ def printImage(pr,fl,ic):
             im = im.rotate(90, expand=True)
         except:
             print("    Failed to rotate")
+    if ic:
+        try:
+            im = ImageOps.invert(im.convert('RGB'))
+            print("Inverting colors")
+        except:
+            print("Failed to invert colors")
     if fl:
         try:
             print("    Filtering Color")
@@ -32,13 +38,7 @@ def printImage(pr,fl,ic):
             mask.putdata(newIm)
             im.pase(mask, (0,0), mask)
         except:
-            print("Failed to filter color")
-    if ic:
-        try:
-            im = ImageOps.invert(im.convert('RGB'))
-            print("Inverting colors")
-        except:
-            print("Failed to invert colors")
+            print("Failed to filter color")    
     # Resize Image if too wide
     if im.width > maxW:
         try:
