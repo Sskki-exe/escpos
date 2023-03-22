@@ -5,9 +5,10 @@ import textwrap
 
 # Variables
 maxW = 384
+maxH = 1066
 
 # Define Functions
-def printImage(pr,fl):
+def printImage(pr,fl,ic):
     print("Printing Image!")
     im = Image.open("out.gif")
     # If don't auto rotate option select
@@ -32,12 +33,25 @@ def printImage(pr,fl):
             im.pase(mask, (0,0), mask)
         except:
             print("Failed to filter color")
+    if ic:
+        try:
+            im = ImageOps.invert(im.convert('RGB'))
+            print("Inverting colors")
+        except:
+            print("Failed to invert colors")
     # Resize Image if too wide
     if im.width > maxW:
         try:
-            print("    Resizing")
+            print("    Too wide, resizing")
             h = int(maxW * im.height / im.width)
             im = im.resize((maxW, h))
+        except:
+            print("    Failed to resize")
+    if im.height > maxH:
+        try:
+            print("    Too tall, resizing")
+            w = int(maxH * im.width / im.height)
+            im = im.resize((w, maxH))
         except:
             print("    Failed to resize")
     # Save Image
@@ -95,7 +109,8 @@ def clickPrint():
                 print("saved")
                 pr = request.form.get("portrait")
                 fl = request.form.get("colorFilter")
-                printImage(pr,fl)
+                ic = request.form.get("invertColor")
+                printImage(pr,fl,ic)
         except:
             pass
     return render_template('index.html')
