@@ -8,8 +8,9 @@
             --p: #8c6d62;
             --pL: #bd9b8f;
             --pD: #5e4238;
-            --n0: #F5F5F6;
+            --n0: #202020;
             --n1: #E1E2E1;
+            --t: white;
         }
 
         body {
@@ -64,9 +65,8 @@
     </style>
 </head>
 
-<body onload="document.main.reset()">
+<body onload="document.main.reset()" style="color: var(--t);">
     <h2>Thermal Printer</h2>
-    <div class="output"></div>
     <div>
         <form method="post" enctype="multipart/form-data">
             <label>Rotate Portrait?</label>
